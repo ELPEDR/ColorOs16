@@ -18401,4 +18401,3 @@ cr.getObjectRefTable = function () { return [
 	cr.system_object.prototype.cnds.EveryTick,
 	cr.plugins_.Sprite.prototype.acts.SetEffectParam
 ];};
-

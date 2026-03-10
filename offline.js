@@ -1,5 +1,5 @@
 ﻿{
-	"version": 1773014086,
+	"version": 1773122800,
 	"fileList": [
 		"data.js",
 		"c2runtime.js",
@@ -13,6 +13,8 @@
 		"images/ghosttouch-sheet0.png",
 		"images/sprite4-sheet0.png",
 		"images/sprite5-sheet0.png",
+		"images/sprite6-sheet0.png",
+		"images/spritefont.png",
 		"icon-16.png",
 		"icon-32.png",
 		"icon-114.png",

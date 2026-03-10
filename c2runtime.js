@@ -20163,9 +20163,9 @@ cr.getObjectRefTable = function () { return [
 	cr.plugins_.Sprite.prototype.acts.SetEffectParam,
 	cr.plugins_.Sprite.prototype.acts.SetPosToObject,
 	cr.plugins_.SpriteFontPlus.prototype.acts.SetText,
-	cr.system_object.prototype.exps["int"],
-	cr.plugins_.Browser.prototype.exps.BatteryLevel,
 	cr.system_object.prototype.exps.zeropad,
 	cr.plugins_.Rex_Date.prototype.exps.Hours,
-	cr.plugins_.Rex_Date.prototype.exps.Minutes
+	cr.plugins_.Rex_Date.prototype.exps.Minutes,
+	cr.system_object.prototype.exps["int"],
+	cr.plugins_.Browser.prototype.exps.BatteryLevel
 ];};

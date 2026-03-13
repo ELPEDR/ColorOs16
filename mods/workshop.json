@@ -1,15 +1,15 @@
 {
   "c2dictionary": true,
   "data": {
-    "Themes_quantity": 1,
+    "Themes_quantity": 2,
 
     "tema1_name": "wall1",
     "tema1_preview": "https://raw.githubusercontent.com/ELPEDR/ColorOs16/refs/heads/main/mods/wall1/wall1.png",
     "tema1_link": "https://raw.githubusercontent.com/ELPEDR/ColorOs16/refs/heads/main/mods/wall1/theme1.json",
 
-    "tema2_name": "IOS 26",
-    "tema2_preview": "https://raw.githubusercontent.com/ELPEDR/on7Themes/main/themres/theme2/preview2.png",
-    "tema2_link": "https://raw.githubusercontent.com/ELPEDR/on7Themes/main/themes/theme2.json",
+    "tema2_name": "wall2",
+    "tema2_preview": "https://raw.githubusercontent.com/ELPEDR/ColorOs16/refs/heads/main/mods/wall2/wall2.png",
+    "tema2_link": "https://raw.githubusercontent.com/ELPEDR/ColorOs16/refs/heads/main/mods/wall2/theme2.json",
     
     "tema3_name": "Pixel",
     "tema3_preview": "https://raw.githubusercontent.com/ELPEDR/on7Themes/main/themres/themes3/preview3.png",

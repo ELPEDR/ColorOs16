@@ -15293,33 +15293,29 @@ cr.shaders["divide"] = {src: ["varying mediump vec2 vTex;",
 	preservesOpaqueness: false,
 	animated: false,
 	parameters: [] }
-cr.shaders["grayscalemask"] = {src: ["varying mediump vec2 vTex;",
+cr.shaders["exposure"] = {src: ["varying mediump vec2 vTex;",
 "uniform lowp sampler2D samplerFront;",
-"uniform lowp sampler2D samplerBack;",
-"uniform mediump vec2 destStart;",
-"uniform mediump vec2 destEnd;",
+"uniform mediump float exposure;",
 "void main(void)",
 "{",
-"lowp float fronta = texture2D(samplerFront, vTex).a;",
-"lowp vec4 back = texture2D(samplerBack, mix(destStart, destEnd, vTex));",
-"lowp float gray = back.r * 0.299 + back.g * 0.587 + back.b * 0.114;",
-"gl_FragColor = mix(back, vec4(gray, gray, gray, back.a), fronta);",
+"lowp vec4 front = texture2D(samplerFront, vTex);",
+"gl_FragColor = vec4(front.rgb * pow(2.0, exposure), front.a);",
 "}"
 ].join("\n"),
 	extendBoxHorizontal: 0,
 	extendBoxVertical: 0,
-	crossSampling: true,
+	crossSampling: false,
 	preservesOpaqueness: true,
 	animated: false,
-	parameters: [] }
-cr.shaders["inverse"] = {src: ["varying mediump vec2 vTex;",
+	parameters: [["exposure", 0, 1]] }
+cr.shaders["grayscale"] = {src: ["varying mediump vec2 vTex;",
 "uniform lowp sampler2D samplerFront;",
 "uniform lowp float intensity;",
 "void main(void)",
 "{",
 "lowp vec4 front = texture2D(samplerFront, vTex);",
-"lowp vec3 inverse = vec3(front.a - front.rgb);",
-"gl_FragColor = vec4(mix(front.rgb, inverse, intensity), front.a);",
+"lowp float gray = front.r * 0.299 + front.g * 0.587 + front.b * 0.114;",
+"gl_FragColor = mix(front, vec4(gray, gray, gray, front.a), intensity);",
 "}"
 ].join("\n"),
 	extendBoxHorizontal: 0,
@@ -21731,6 +21727,51 @@ cr.behaviors.DragnDrop = function(runtime)
 }());
 ;
 ;
+cr.behaviors.Persist = function(runtime)
+{
+	this.runtime = runtime;
+};
+(function ()
+{
+	var behaviorProto = cr.behaviors.Persist.prototype;
+	behaviorProto.Type = function(behavior, objtype)
+	{
+		this.behavior = behavior;
+		this.objtype = objtype;
+		this.runtime = behavior.runtime;
+	};
+	var behtypeProto = behaviorProto.Type.prototype;
+	behtypeProto.onCreate = function()
+	{
+	};
+	behaviorProto.Instance = function(type, inst)
+	{
+		this.type = type;
+		this.behavior = type.behavior;
+		this.inst = inst;				// associated object instance to modify
+		this.runtime = type.runtime;
+	};
+	var behinstProto = behaviorProto.Instance.prototype;
+	behinstProto.onCreate = function()
+	{
+		this.myProperty = this.properties[0];
+	};
+	behinstProto.onDestroy = function ()
+	{
+	};
+	behinstProto.tick = function ()
+	{
+		var dt = this.runtime.getDt(this.inst);
+	};
+	function Cnds() {};
+	behaviorProto.cnds = new Cnds();
+	function Acts() {};
+	behaviorProto.acts = new Acts();
+	function Exps() {};
+	behaviorProto.exps = new Exps();
+}());
+;
+;
 cr.behaviors.Pin = function(runtime)
 {
 	this.runtime = runtime;
@@ -21897,20 +21938,29 @@ cr.getObjectRefTable = function () { return [
 	cr.plugins_.NinePatch,
 	cr.plugins_.AJAX,
 	cr.plugins_.Browser,
+	cr.plugins_.Function,
 	cr.plugins_.Dictionary,
 	cr.plugins_.filechooser,
-	cr.plugins_.Function,
 	cr.plugins_.Keyboard,
 	cr.plugins_.Rex_Date,
+	cr.plugins_.SpriteFontPlus,
 	cr.plugins_.sliderbar,
 	cr.plugins_.Sprite,
-	cr.plugins_.SpriteFontPlus,
 	cr.plugins_.Touch,
-	cr.behaviors.DragnDrop,
 	cr.behaviors.Pin,
+	cr.behaviors.DragnDrop,
+	cr.behaviors.Persist,
+	cr.plugins_.Sprite.prototype.cnds.OnCreated,
+	cr.plugins_.Sprite.prototype.cnds.CompareInstanceVar,
+	cr.system_object.prototype.acts.AddVar,
+	cr.plugins_.Sprite.prototype.acts.SetInstanceVar,
 	cr.system_object.prototype.cnds.OnLayoutStart,
 	cr.system_object.prototype.acts.SetVar,
 	cr.plugins_.Sprite.prototype.acts.SetAnimFrame,
+	cr.system_object.prototype.cnds.ForEach,
+	cr.system_object.prototype.cnds.PickByComparison,
+	cr.plugins_.Sprite.prototype.exps.X,
+	cr.plugins_.Sprite.prototype.exps.Y,
 	cr.plugins_.Sprite.prototype.cnds.OnFrameChanged,
 	cr.plugins_.Sprite.prototype.acts.SetSize,
 	cr.plugins_.Sprite.prototype.exps.ImageWidth,
@@ -21918,23 +21968,15 @@ cr.getObjectRefTable = function () { return [
 	cr.plugins_.Sprite.prototype.exps.Width,
 	cr.plugins_.Sprite.prototype.exps.Height,
 	cr.plugins_.Sprite.prototype.exps.ImageHeight,
-	cr.plugins_.Sprite.prototype.cnds.OnCreated,
-	cr.system_object.prototype.acts.AddVar,
-	cr.plugins_.Sprite.prototype.acts.SetInstanceVar,
 	cr.plugins_.Sprite.prototype.acts.Spawn,
 	cr.plugins_.NinePatch.prototype.acts.SetInstanceVar,
-	cr.plugins_.Sprite.prototype.exps.X,
-	cr.plugins_.Sprite.prototype.exps.Y,
 	cr.plugins_.Sprite.prototype.acts.MoveToTop,
-	cr.plugins_.Sprite.prototype.cnds.CompareInstanceVar,
 	cr.plugins_.Sprite.prototype.cnds.CompareHeight,
 	cr.plugins_.Sprite.prototype.acts.SetOpacity,
 	cr.system_object.prototype.exps.lerp,
 	cr.plugins_.Sprite.prototype.exps.Opacity,
 	cr.system_object.prototype.cnds.CompareVar,
 	cr.plugins_.Sprite.prototype.acts.SetPos,
-	cr.system_object.prototype.cnds.ForEach,
-	cr.system_object.prototype.cnds.PickByComparison,
 	cr.plugins_.NinePatch.prototype.acts.SetPos,
 	cr.plugins_.NinePatch.prototype.exps.X,
 	cr.plugins_.NinePatch.prototype.exps.Y,
@@ -21984,12 +22026,24 @@ cr.getObjectRefTable = function () { return [
 	cr.plugins_.NinePatch.prototype.cnds.CompareHeight,
 	cr.system_object.prototype.acts.GoToLayoutByName,
 	cr.plugins_.Sprite.prototype.acts.SetEffectEnabled,
+	cr.plugins_.Sprite.prototype.cnds.IsOverlapping,
+	cr.plugins_.Sprite.prototype.cnds.CompareWidth,
+	cr.plugins_.Function.prototype.acts.CallFunction,
+	cr.plugins_.Function.prototype.cnds.OnFunction,
+	cr.plugins_.Function.prototype.exps.Param,
+	cr.plugins_.NinePatch.prototype.acts.SetVisible,
+	cr.behaviors.DragnDrop.prototype.acts.SetEnabled,
+	cr.plugins_.Touch.prototype.cnds.OnHoldGestureObject,
 	cr.plugins_.SpriteFontPlus.prototype.acts.SetPosToObject,
 	cr.plugins_.SpriteFontPlus.prototype.acts.SetOpacity,
 	cr.plugins_.SpriteFontPlus.prototype.exps.Opacity,
 	cr.behaviors.Pin.prototype.acts.Pin,
 	cr.plugins_.Sprite.prototype.cnds.CompareY,
+	cr.plugins_.SpriteFontPlus.prototype.acts.SetEffectParam,
 	cr.plugins_.SpriteFontPlus.prototype.acts.SetEffectEnabled,
+	cr.plugins_.Sprite.prototype.cnds.CompareFrame,
+	cr.system_object.prototype.acts.SubVar,
+	cr.plugins_.SpriteFontPlus.prototype.cnds.OnCreated,
 	cr.plugins_.sliderbar.prototype.cnds.OnCreated,
 	cr.plugins_.sliderbar.prototype.acts.SetValue,
 	cr.plugins_.sliderbar.prototype.exps.Value,
@@ -22001,14 +22055,11 @@ cr.getObjectRefTable = function () { return [
 	cr.system_object.prototype.acts.CreateObject,
 	cr.plugins_.Sprite.prototype.acts.SetVisible,
 	cr.plugins_.SpriteFontPlus.prototype.acts.SetInstanceVar,
-	cr.plugins_.SpriteFontPlus.prototype.acts.SetEffectParam,
 	cr.plugins_.AJAX.prototype.acts.Request,
 	cr.plugins_.AJAX.prototype.cnds.OnComplete,
 	cr.plugins_.Dictionary.prototype.acts.JSONLoad,
 	cr.plugins_.AJAX.prototype.exps.LastData,
 	cr.plugins_.Dictionary.prototype.exps.Get,
-	cr.plugins_.Function.prototype.acts.CallFunction,
-	cr.plugins_.Function.prototype.cnds.OnFunction,
 	cr.system_object.prototype.cnds.For,
 	cr.system_object.prototype.exps.loopindex,
 	cr.plugins_.Sprite.prototype.cnds.OnURLLoaded,

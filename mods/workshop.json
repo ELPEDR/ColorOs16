@@ -15,12 +15,12 @@
     "tema3_preview": "https://raw.githubusercontent.com/ELPEDR/ColorOs16/refs/heads/main/mods/wall3/wall3.png",
     "tema3_link": "https://raw.githubusercontent.com/ELPEDR/ColorOs16/refs/heads/main/mods/wall3/theme3.json",
   
-    "tema3_name": "wall4",
-    "tema3_preview": "https://raw.githubusercontent.com/ELPEDR/ColorOs16/refs/heads/main/mods/wall4/wall4.png",
-    "tema3_link": "https://raw.githubusercontent.com/ELPEDR/ColorOs16/refs/heads/main/mods/wall4/theme4.json",
+    "tema4_name": "wall4",
+    "tema4_preview": "https://raw.githubusercontent.com/ELPEDR/ColorOs16/refs/heads/main/mods/wall4/wall4.png",
+    "tema4_link": "https://raw.githubusercontent.com/ELPEDR/ColorOs16/refs/heads/main/mods/wall4/theme4.json",
 
-    "tema4_name": "wall5",
-    "tema4_preview": "https://raw.githubusercontent.com/ELPEDR/ColorOs16/refs/heads/main/mods/wall5/wall5.png",
-    "tema4_link": "https://raw.githubusercontent.com/ELPEDR/ColorOs16/refs/heads/main/mods/wall5/theme5.json"
+    "tema5_name": "wall5",
+    "tema5_preview": "https://raw.githubusercontent.com/ELPEDR/ColorOs16/refs/heads/main/mods/wall5/wall5.png",
+    "tema5_link": "https://raw.githubusercontent.com/ELPEDR/ColorOs16/refs/heads/main/mods/wall5/theme5.json"
   }
 }

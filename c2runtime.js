@@ -25081,6 +25081,7 @@ cr.getObjectRefTable = function () { return [
 	cr.plugins_.NinePatch.prototype.acts.SetOpacity,
 	cr.plugins_.NinePatch.prototype.exps.Opacity,
 	cr.plugins_.Sprite.prototype.acts.SetPos,
+	cr.plugins_.NinePatch.prototype.cnds.CompareInstanceVar,
 	cr.plugins_.NinePatch.prototype.acts.SetPos,
 	cr.plugins_.NinePatch.prototype.exps.X,
 	cr.plugins_.NinePatch.prototype.exps.Y,

@@ -1,5 +1,5 @@
 ﻿{
-	"version": 1775330807,
+	"version": 1778361986,
 	"fileList": [
 		"data.js",
 		"c2runtime.js",
@@ -58,6 +58,7 @@
 		"images/sprite31-sheet0.png",
 		"images/sprite33-sheet0.png",
 		"images/sprite34-sheet0.png",
+		"images/sprite35-sheet0.png",
 		"media/lvbel c5, akdo - coook pardon (remix) - lvbelc5 (128k).ogg",
 		"icon-16.png",
 		"icon-32.png",
